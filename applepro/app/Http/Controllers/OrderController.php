@@ -61,7 +61,9 @@ class OrderController extends Controller
       $orderitem->deliver=$a;
       $orderitem->save();
       $del=CartItem::where('product_id',$productId)->first();
-    CartItem::destroy($del->id);
+      if ($del) {
+        CartItem::destroy($del->id);
+      }
 
        return view('order.placeorder',['item'=>$orderitem]);
 
